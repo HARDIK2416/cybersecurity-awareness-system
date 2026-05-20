@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberShield - Cybersecurity Awareness Website</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #07111f;
+      color: #eaf2ff;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --bg: #07111f;
+      --card: #101d33;
+      --card2: #13233d;
+      --primary: #00e5ff;
+      --secondary: #7c3cff;
+      --green: #21e786;
+      --red: #ff4d6d;
+      --yellow: #ffd166;
+      --text: #eaf2ff;
+      --muted: #a9bad3;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(7, 17, 31, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: 0.4px;
+    }
+
+    .logo span {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #06101f;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.45);
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.25s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 90px 0 70px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(0,229,255,0.25), transparent 65%);
+      top: -120px;
+      left: -120px;
+      filter: blur(10px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(124,60,255,0.25), transparent 65%);
+      bottom: -120px;
+      right: -120px;
+      filter: blur(10px);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(0, 229, 255, 0.08);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--primary), var(--green), var(--secondary));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #06101f;
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0, 229, 255, 0.35);
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(19,35,61,0.95), rgba(16,29,51,0.95));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.25), transparent, rgba(124,60,255,0.25));
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .terminal {
+      position: relative;
+      z-index: 1;
+      background: #06101f;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .terminal-top {
+      padding: 14px;
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .red { background: #ff5f57; }
+    .yellow { background: #ffbd2e; }
+    .green { background: #28c840; }
+
+    .terminal-body {
+      padding: 22px;
+      line-height: 1.9;
+      color: #b8f7ff;
+      font-family: Consolas, monospace;
+      min-height: 285px;
+    }
+
+    .terminal-body span {
+      color: var(--green);
+      font-family: Consolas, monospace;
+    }
+
+    /* Section */
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 760px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.22);
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,229,255,0.45);
+      box-shadow: 0 20px 45px rgba(0,229,255,0.08);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 229, 255, 0.12);
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .card ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    /* Tools */
+    .tool-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 14px;
+    }
+
+    textarea,
+    input,
+    select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #081629;
+      color: var(--text);
+      outline: none;
+      margin: 10px 0;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      min-height: 135px;
+      resize: vertical;
+    }
+
+    textarea:focus,
+    input:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0,229,255,0.08);
+    }
+
+    .result {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .safe {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .danger {
+      color: var(--red);
+      font-weight: 800;
+    }
+
+    .warning {
+      color: var(--yellow);
+      font-weight: 800;
+    }
+
+    .strength-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .strength-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      transition: 0.3s;
+      background: var(--red);
+    }
+
+    /* Roadmap */
+    .roadmap {
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid var(--border);
+      transition: 0.25s;
+    }
+
+    .step:hover {
+      transform: translateX(5px);
+      border-color: rgba(0,229,255,0.45);
+    }
+
+    .step-num {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #06101f;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .watch-btn {
+      white-space: nowrap;
+      background: rgba(255, 77, 109, 0.13);
+      color: #ff8fa3;
+      border: 1px solid rgba(255, 77, 109, 0.35);
+      padding: 11px 15px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.25s;
+    }
+
+    .watch-btn:hover {
+      background: #ff4d6d;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Quiz */
+    .quiz-card {
+      max-width: 780px;
+      margin: auto;
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .option {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin: 12px 0;
+      cursor: pointer;
+      color: var(--muted);
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      border-color: var(--primary);
+      color: var(--text);
+      background: rgba(0,229,255,0.06);
+    }
+
+    .option.correct {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(33,231,134,0.08);
+    }
+
+    .option.wrong {
+      border-color: var(--red);
+      color: var(--red);
+      background: rgba(255,77,109,0.08);
+    }
+
+    .quiz-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Report Guide */
+    .report-box {
+      background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(124,60,255,0.12));
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 26px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .report-box p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 12px auto 22px;
+      max-width: 800px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--border);
+      background: #050d18;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .top-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #06101f;
+      font-weight: 900;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 72px;
+        background: rgba(7, 17, 31, 0.98);
+        border-bottom: 1px solid var(--border);
+        display: none;
+      }
+
+      nav.active {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 4%;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .step-num {
+        width: 42px;
+        height: 42px;
+      }
+
+      .watch-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 55px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+
+      .card,
+      .quiz-card,
+      .report-box {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="#" class="logo">
+        <span>🛡️</span>
+        CyberShield
+      </a>
+
+      <button class="menu-btn" id="menuBtn">☰</button>
+
+      <nav id="navMenu">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#roadmap">Skill Steps</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#scams">Scams</a></li>
+          <li><a href="#report">Report</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">🔐 Educational & Defensive Cybersecurity</div>
+        <h1>Stay Safe Online with <span>Cyber Awareness</span></h1>
+        <p>
+          Learn how to identify phishing, create strong passwords, avoid scams,
+          browse safely, and report cybercrime. This website is made for normal
+          users, students, and beginners who want practical cybersecurity safety.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#tools" class="btn btn-primary">Start Safety Check</a>
+          <a href="#roadmap" class="btn btn-outline">Learn Step-by-Step</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="terminal">
+          <div class="terminal-top">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+          <div class="terminal-body">
+            <p><span>$</span> scan online-habits</p>
+            <p>Checking password safety...</p>
+            <p>Checking phishing risk...</p>
+            <p>Checking scam awareness...</p>
+            <p><span>Status:</span> Learning mode activated ✅</p>
+            <p><span>Goal:</span> Safe internet for everyone 🛡️</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Website Features</h2>
+        <p>
+          Simple tools and learning modules that help users understand cyber safety
+          without hacking or harmful activity.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="icon">📧</div>
+          <h3>Phishing Checker</h3>
+          <p>Paste a suspicious email or message and check common warning signs like urgent words, fake links, prizes, and password requests.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔑</div>
+          <h3>Password Strength</h3>
+          <p>Check if your password is weak, medium, or strong using length, numbers, symbols, and uppercase/lowercase letters.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>Cyber Quiz</h3>
+          <p>Practice with beginner-friendly cybersecurity questions and improve your awareness score.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">⚠️</div>
+          <h3>Common Scams</h3>
+          <p>Learn about OTP fraud, fake jobs, fake shopping links, lottery scams, investment scams, and social media traps.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🌐</div>
+          <h3>Safe Browsing Tips</h3>
+          <p>Understand HTTPS, app permissions, public Wi-Fi safety, updates, and safe download habits.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🚨</div>
+          <h3>Report Cybercrime</h3>
+          <p>Guide users to collect proof, avoid deleting evidence, and report cybercrime through official channels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools">
+    <div class="container">
+      <div class="section-title">
+        <h2>Cyber Safety Tools</h2>
+        <p>Interactive demos for awareness. These tools are educational and defensive only.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <!-- Phishing Checker -->
+        <div class="card">
+          <div class="icon">📧</div>
+          <h3>Phishing Email Checker Demo</h3>
+          <p>Paste an email/message and check for suspicious patterns.</p>
+
+          <div class="tool-box">
+            <textarea id="phishingText" placeholder="Paste suspicious email/message here..."></textarea>
+            <button class="btn btn-primary" onclick="checkPhishing()">Check Message</button>
+            <div class="result" id="phishingResult">Result will appear here.</div>
+          </div>
+        </div>
+
+        <!-- Password Checker -->
+        <div class="card">
+          <div class="icon">🔑</div>
+          <h3>Password Strength Checker</h3>
+          <p>Type a password and check its strength.</p>
+
+          <div class="tool-box">
+            <input type="password" id="passwordInput" placeholder="Enter password..." oninput="checkPassword()" />
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="result" id="passwordResult">Password strength will appear here.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skill Wise Roadmap -->
+  <section id="roadmap">
+    <div class="container">
+      <div class="section-title">
+        <h2>Skill-Wise Cyber Safety Steps</h2>
+        <p>
+          Click the Watch Video button. It will open YouTube videos related to that step,
+          so users can learn and complete the topic easily.
+        </p>
+      </div>
+
+      <div class="roadmap">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Understand Cybersecurity Basics</h3>
+            <p>Learn what cybersecurity means, why online safety matters, and common cyber risks for normal users.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=cybersecurity+basics+for+beginners">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Learn Phishing Email Detection</h3>
+            <p>Understand fake emails, suspicious links, urgent messages, fake login pages, and attachment risks.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=how+to+identify+phishing+emails+for+beginners">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Create Strong Passwords</h3>
+            <p>Learn password length, passphrases, password managers, and why password reuse is risky.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=how+to+create+strong+passwords+password+manager+basics">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Enable Two-Factor Authentication</h3>
+            <p>Learn how 2FA protects accounts and why authenticator apps are safer than only passwords.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=two+factor+authentication+explained+for+beginners">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">5</div>
+          <div>
+            <h3>Safe Browsing and Downloads</h3>
+            <p>Understand HTTPS, fake websites, safe downloads, browser updates, and avoiding unknown files.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=safe+browsing+tips+avoid+fake+websites+downloads">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">6</div>
+          <div>
+            <h3>Mobile App Privacy and Permissions</h3>
+            <p>Learn app permission safety, fake apps, updates, and protecting personal data on mobile.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=mobile+app+permissions+privacy+safety+tips">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">7</div>
+          <div>
+            <h3>Social Media Safety</h3>
+            <p>Learn privacy settings, fake profiles, oversharing risks, and account recovery protection.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=social+media+safety+tips+privacy+settings">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">8</div>
+          <div>
+            <h3>Recognize Online Scams</h3>
+            <p>Learn about OTP scams, fake job offers, fake shopping links, lottery scams, and investment fraud.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=common+online+scams+and+how+to+avoid+them">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">9</div>
+          <div>
+            <h3>Public Wi-Fi Safety</h3>
+            <p>Learn why public Wi-Fi can be risky and how to avoid logging into sensitive accounts on unsafe networks.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=public+wifi+safety+tips+cybersecurity">▶ Watch Video</a>
+        </div>
+
+        <div class="step">
+          <div class="step-num">10</div>
+          <div>
+            <h3>Report Cybercrime Safely</h3>
+            <p>Learn how to collect evidence, save screenshots, avoid deleting proof, and report cybercrime.</p>
+          </div>
+          <a class="watch-btn" target="_blank" href="https://www.youtube.com/results?search_query=how+to+report+cybercrime+in+India+cyber+crime+portal">▶ Watch Video</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section id="quiz">
+    <div class="container">
+      <div class="section-title">
+        <h2>Cyber Safety Quiz</h2>
+        <p>Test your basic cyber awareness knowledge.</p>
+      </div>
+
+      <div class="quiz-card">
+        <h3 id="questionText">Question will appear here</h3>
+        <div id="optionsBox"></div>
+
+        <div class="quiz-footer">
+          <p id="scoreText">Score: 0</p>
+          <button class="btn btn-primary" onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <div class="result" id="quizFeedback">Choose an answer.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scams -->
+  <section id="scams">
+    <div class="container">
+      <div class="section-title">
+        <h2>Common Online Scams</h2>
+        <p>Awareness is the first step to safety. Learn these common scams and warning signs.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="icon">📱</div>
+          <h3>OTP Fraud</h3>
+          <ul>
+            <li>Never share OTP with anyone.</li>
+            <li>Banks never ask for OTP on calls.</li>
+            <li>Be careful with fake customer care numbers.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">💼</div>
+          <h3>Fake Job Offers</h3>
+          <ul>
+            <li>Be careful if they ask for registration fees.</li>
+            <li>Verify company email and website.</li>
+            <li>Avoid offers that sound too easy.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">🛒</div>
+          <h3>Fake Shopping Links</h3>
+          <ul>
+            <li>Check website spelling carefully.</li>
+            <li>Avoid unknown links from messages.</li>
+            <li>Use trusted payment methods.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎁</div>
+          <h3>Lottery and Prize Scam</h3>
+          <ul>
+            <li>Do not pay money to claim a prize.</li>
+            <li>Do not share bank details.</li>
+            <li>Fake urgency is a warning sign.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>Investment Scam</h3>
+          <ul>
+            <li>Be careful with guaranteed high returns.</li>
+            <li>Research before investing.</li>
+            <li>Do not trust random Telegram/WhatsApp tips.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">👤</div>
+          <h3>Fake Social Profile</h3>
+          <ul>
+            <li>Verify identity before trusting.</li>
+            <li>Do not send money to unknown people.</li>
+            <li>Protect your personal photos and data.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe Tips -->
+  <section id="tips">
+    <div class="container">
+      <div class="section-title">
+        <h2>Safe Browsing Tips</h2>
+        <p>Follow these habits daily to reduce cyber risk.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="icon">✅</div>
+          <h3>Daily Safety Checklist</h3>
+          <ul>
+            <li>Use strong and unique passwords.</li>
+            <li>Enable 2FA on important accounts.</li>
+            <li>Update phone, apps, and browser.</li>
+            <li>Do not click unknown links.</li>
+            <li>Download apps only from trusted stores.</li>
+            <li>Check website URL before login.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧩</div>
+          <h3>Smart Internet Habits</h3>
+          <ul>
+            <li>Think before sharing personal details.</li>
+            <li>Do not trust messages creating panic.</li>
+            <li>Verify offers from official websites.</li>
+            <li>Use screen lock on phone and laptop.</li>
+            <li>Logout from shared computers.</li>
+            <li>Backup important files regularly.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Report -->
+  <section id="report">
+    <div class="container">
+      <div class="report-box">
+        <h2>Report Cybercrime Guide</h2>
+        <p>
+          If you face cyber fraud, do not panic. Save screenshots, transaction details,
+          phone numbers, email IDs, links, and chat proof. Do not delete evidence.
+          Report through the official cybercrime portal or contact local cyber police.
+        </p>
+
+        <div class="hero-actions" style="justify-content:center;">
+          <a class="btn btn-primary" target="_blank" href="https://cybercrime.gov.in/">Official Cybercrime Portal</a>
+          <a class="btn btn-outline" target="_blank" href="https://www.youtube.com/results?search_query=how+to+report+cybercrime+in+India+step+by+step">Watch Reporting Guide</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 CyberShield. Educational and defensive cybersecurity awareness website.</p>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#tools">Tools</a>
+        <a href="#roadmap">Skill Steps</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#report">Report</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="top-btn" id="topBtn" onclick="scrollToTop()">↑</button>
+
+  <script>
+    // Mobile Menu
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    menuBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+      });
+    });
+
+    // Back to Top Button
+    const topBtn = document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        topBtn.style.display = "block";
+      } else {
+        topBtn.style.display = "none";
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Phishing Checker
+    function checkPhishing() {
+      const text = document.getElementById("phishingText").value.toLowerCase();
+      const result = document.getElementById("phishingResult");
+
+      if (text.trim() === "") {
+        result.innerHTML = "<span class='warning'>Please paste a message first.</span>";
+        return;
+      }
+
+      const suspiciousWords = [
+        "urgent",
+        "verify your account",
+        "password",
+        "otp",
+        "click here",
+        "login now",
+        "limited time",
+        "winner",
+        "prize",
+        "bank account",
+        "blocked",
+        "suspended",
+        "update payment",
+        "confirm your identity",
+        "free gift",
+        "lottery",
+        "kyc",
+        "refund"
+      ];
+
+      let score = 0;
+      let found = [];
+
+      suspiciousWords.forEach(word => {
+        if (text.includes(word)) {
+          score++;
+          found.push(word);
+        }
+      });
+
+      const hasLink = text.includes("http://") || text.includes("https://") || text.includes("www.");
+      if (hasLink) {
+        score++;
+        found.push("link detected");
+      }
+
+      const hasMoney = text.includes("₹") || text.includes("$") || text.includes("money") || text.includes("payment");
+      if (hasMoney) {
+        score++;
+        found.push("money/payment related word");
+      }
+
+      if (score >= 5) {
+        result.innerHTML = `
+          <span class="danger">High Risk: This message looks suspicious.</span><br>
+          Warning signs found: ${found.join(", ")}.<br>
+          Do not click links or share OTP/password.
+        `;
+      } else if (score >= 2) {
+        result.innerHTML = `
+          <span class="warning">Medium Risk: Be careful with this message.</span><br>
+          Warning signs found: ${found.join(", ")}.<br>
+          Verify from official website or support number.
+        `;
+      } else {
+        result.innerHTML = `
+          <span class="safe">Low Risk: No major phishing signs found.</span><br>
+          Still verify sender, links, and attachments before trusting.
+        `;
+      }
+    }
+
+    // Password Strength Checker
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const result = document.getElementById("passwordResult");
+      const fill = document.getElementById("strengthFill");
+
+      let score = 0;
+
+      if (password.length >= 8) score++;
+      if (password.length >= 12) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[a-z]/.test(password)) score++;
+      if (/[0-9]/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+
+      if (password.length === 0) {
+        fill.style.width = "0%";
+        fill.style.background = "var(--red)";
+        result.innerHTML = "Password strength will appear here.";
+        return;
+      }
+
+      if (score <= 2) {
+        fill.style.width = "30%";
+        fill.style.background = "var(--red)";
+        result.innerHTML = `
+          <span class="danger">Weak Password</span><br>
+          Add more length, uppercase, numbers, and symbols.
+        `;
+      } else if (score <= 4) {
+        fill.style.width = "65%";
+        fill.style.background = "var(--yellow)";
+        result.innerHTML = `
+          <span class="warning">Medium Password</span><br>
+          Make it 12+ characters and avoid common words.
+        `;
+      } else {
+        fill.style.width = "100%";
+        fill.style.background = "var(--green)";
+        result.innerHTML = `
+          <span class="safe">Strong Password</span><br>
+          Good! Use unique passwords for every account.
+        `;
+      }
+    }
+
+    // Quiz
+    const quizData = [
+      {
+        question: "What should you do if someone asks for your OTP?",
+        options: [
+          "Share it quickly",
+          "Never share OTP with anyone",
+          "Post it on social media",
+          "Send it by email"
+        ],
+        answer: 1
+      },
+      {
+        question: "Which password is stronger?",
+        options: [
+          "12345678",
+          "password123",
+          "Hardik@2026#Safe",
+          "qwerty"
+        ],
+        answer: 2
+      },
+      {
+        question: "What is a common sign of phishing?",
+        options: [
+          "Urgent message asking to click a link",
+          "Normal newsletter from trusted website",
+          "A saved contact message",
+          "A school notice from official email"
+        ],
+        answer: 0
+      },
+      {
+        question: "What should you check before logging into a website?",
+        options: [
+          "Website URL and HTTPS",
+          "Only website color",
+          "Only logo",
+          "Only advertisement"
+        ],
+        answer: 0
+      },
+      {
+        question: "What is safer on important accounts?",
+        options: [
+          "Same password everywhere",
+          "No password",
+          "Two-factor authentication",
+          "Sharing password with friends"
+        ],
+        answer: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionText = document.getElementById("questionText");
+    const optionsBox = document.getElementById("optionsBox");
+    const scoreText = document.getElementById("scoreText");
+    const quizFeedback = document.getElementById("quizFeedback");
+
+    function loadQuestion() {
+      answered = false;
+      const q = quizData[currentQuestion];
+      questionText.textContent = `Q${currentQuestion + 1}. ${q.question}`;
+      optionsBox.innerHTML = "";
+      quizFeedback.textContent = "Choose an answer.";
+
+      q.options.forEach((option, index) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.textContent = option;
+        div.onclick = () => checkAnswer(div, index);
+        optionsBox.appendChild(div);
+      });
+    }
+
+    function checkAnswer(selected, index) {
+      if (answered) return;
+      answered = true;
+
+      const correctIndex = quizData[currentQuestion].answer;
+      const allOptions = document.querySelectorAll(".option");
+
+      allOptions.forEach((option, i) => {
+        if (i === correctIndex) {
+          option.classList.add("correct");
+        }
+      });
+
+      if (index === correctIndex) {
+        score++;
+        selected.classList.add("correct");
+        quizFeedback.innerHTML = "<span class='safe'>Correct answer!</span>";
+      } else {
+        selected.classList.add("wrong");
+        quizFeedback.innerHTML = "<span class='danger'>Wrong answer. Check the green option.</span>";
+      }
+
+      scoreText.textContent = `Score: ${score}`;
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+
+      if (currentQuestion >= quizData.length) {
+        questionText.textContent = "Quiz Completed!";
+        optionsBox.innerHTML = "";
+        quizFeedback.innerHTML = `
+          Your final score is <span class="safe">${score}/${quizData.length}</span>.<br>
+          ${score >= 4 ? "Great cyber awareness!" : "Keep learning and try again."}
+        `;
+        currentQuestion = 0;
+        score = 0;
+        scoreText.textContent = "Score: 0";
+        return;
+      }
+
+      loadQuestion();
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
